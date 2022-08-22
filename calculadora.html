@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="style.css">
+ 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio Calculadora</title>
+</head>
+<body>
+    
+    <div class="titulo">Desafio calculadora - aula 19/08
+        <p>Dev for Tech </p>
+    </div>
+    <div class="calculator">
+        <div class="display" id="display"></div>
+        <div class="calculator-buttons">
+
+            <button id="limpar-display" onclick="clean()">CE</button>
+            <button id="limpar-calculo" onclick="cleanAll()">C</button>
+            <button id="backspace" onclick="backspace()"><<</button>
+            <button id="op-dividir" onclick="insert('/')">/</button>
+
+            <button id="tecla7" onclick="insert('7')">7</button>
+            <button id="tecla8" onclick="insert('8')">8</button>
+            <button id="tecla9" onclick="insert('9')">9</button>
+            <button id="op-multiplicar" onclick="insert('*')">x</button>
+
+            <button id="tecla4" onclick="insert('4')">4</button>
+            <button id="tecla5" onclick="insert('5')">5</button>
+            <button id="tecla6" onclick="insert('6')">6</button>
+            <button id="op-subtrair" onclick="insert('-')">-</button>
+
+            <button id="tecla1" onclick="insert('1')">1</button>
+            <button id="tecla2" onclick="insert('2')">2</button>
+            <button id="tecla3" onclick="insert('3')">3</button>
+            <button id="op-somar" onclick="insert('+')">+</button>
+
+            <button id="inverter-sinal" onclick="inverter()">±</button>
+            <button id="tecla0" onclick="insert('0')">0</button>
+            <button id="virgula" onclick="insert('.')">.</button>
+            <button id="igual" onclick="calcular()">=</button>
+        </div>
+    </div>
+
+    <div class="rodape">Aluna: Maria Alice de Melo Sousa
+        <p>Turma 01 - REACT</p>
+        <p>Professor: Kelvin Frade</p>
+    </div>
+
+    <script>
+        let novoNumero = true;
+
+        function insert(num) {
+
+            var numero = document.getElementById('display').innerHTML;
+            document.getElementById('display').innerHTML = numero + num;
+
+        }
+
+        function clean() {
+            document.getElementById('display').innerHTML = "";
+        }
+
+        function cleanAll() {
+            clean();
+            num = undefined;
+            numero = true;
+        }
+
+        function backspace() {
+            var display = document.getElementById('display').innerHTML;
+            document.getElementById('display').innerHTML = display.substring(0, display.length - 1);
+        }
+
+        function calcular() {
+            var display = document.getElementById('display').innerHTML;
+
+            if (display) {
+                document.getElementById('display').innerHTML = eval(display);
+            } else {
+                document.getElementById('display').innerHTML = "ERROR";
+            }
+        }
+
+        const atualizarDisplay = (texto) => {
+            if (novoNumero) {
+                display.textContent = texto.toLocaleString('BR');
+                novoNumero = false;
+            } else {
+                display.textContent += texto.toLocaleString('BR');
+            }
+            document.querySelector('#igual').focus();
+        };
+
+        function inverter() {
+            novoNumero = true;
+            atualizarDisplay(display.textContent * -1);
+        }
+    </script>
+</body>
+</html>
